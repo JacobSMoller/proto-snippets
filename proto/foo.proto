@@ -1,0 +1,12 @@
+syntax = "proto3";
+package foo.v1;
+import "google/protobuf/descriptor.proto";
+
+extend google.protobuf.FieldOptions {
+  bool is_timestamp_option = 50002;
+}
+
+message SystemUsage {
+    int64 foo = 1 [(is_timestamp_option) = true];
+    string bar = 2;
+}
