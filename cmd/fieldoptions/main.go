@@ -3,22 +3,22 @@ package main
 import (
 	"fmt"
 
-	gen_bq_schema "github.com/Unity-Technologies/ugs-data-terraform-workspace/gen/go/gen_bq_schema"
-	su "github.com/Unity-Technologies/ugs-data-terraform-workspace/gen/go/system_usage/v3"
+	gen_bq_schema "github.com/GoogleCloudPlatform/protoc-gen-bq-schema/protos"
 	"google.golang.org/protobuf/proto"
 	descriptorpb "google.golang.org/protobuf/types/descriptorpb"
 )
 
 // Using proto field options
 func main() {
-	msg := su.SystemUsage{}
+	msg := SystemUsage{}
 	reflected := msg.ProtoReflect()
-	field := reflected.Descriptor().Fields().ByName("ts")
+	field := reflected.Descriptor().Fields().ByName("foo")
 	opts := field.Options().(*descriptorpb.FieldOptions)
+	fmt.Println(opts)
 	s := proto.GetExtension(opts, gen_bq_schema.E_Bigquery)
 	option, ok := s.(*gen_bq_schema.BigQueryFieldOptions)
 	if !ok {
-		panic(ok)
+		panic("opsdifjosdijf")
 	}
-	fmt.Println(option.Require, option.TypeOverride)
+	fmt.Println(option)
 }
